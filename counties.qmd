@@ -1,0 +1,18 @@
+---
+title: "Counties"
+author: "Thomas Seoh"
+format: html
+---
+
+
+```{r}
+#| echo: false
+#| message: false
+library(tidyverse)
+library(primer.data)
+```
+
+```{r}
+connectedness |>
+  ggplot(mapping = aes(x = population, y = connectedness)) + 
+    geom_point()
