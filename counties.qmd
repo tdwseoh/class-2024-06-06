@@ -2,17 +2,36 @@
 title: "Counties"
 author: "Thomas Seoh"
 format: html
+execute:
+  echo: false
 ---
 
 
 ```{r}
-#| echo: false
 #| message: false
 library(tidyverse)
 library(primer.data)
 ```
 
 ```{r}
+#| warning: false
+#| message: false
 connectedness |>
-  ggplot(mapping = aes(x = population, y = connectedness)) + 
-    geom_point()
+  ggplot(mapping = aes(x = population, y = connectedness)) +
+  geom_point(color = "black", alpha = 1) +
+  scale_x_log10(labels = scales::comma_format()) +  # Use logarithmic scale for x-axis
+  geom_smooth(method = "lm", color = "blue") +  # Add a linear trend line
+  labs(
+    title = "US County Populations versus Economic Connectedness",
+    subtitle = "Population size does not matter to EC",
+    x = "Population",
+    y = "Economic Connectedness",
+    caption = "Opportunity Insights"
+  ) +
+  theme_minimal(base_size = 15) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 20),
+    plot.subtitle = element_text(hjust = 0.5, size = 16),
+    plot.caption = element_text(hjust = 1, size = 12)
+  )
+```
